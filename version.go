@@ -140,15 +140,31 @@ func CompareVersionF(v1 VFormat, v2 VFormat)(int, error){
 	}
 
 
-	if v1.Version.Major > v2.Version.Major || v1.Version.Minor > v2.Version.Minor || v1.Version.Branch > v2.Version.Branch || v1.Version.Build > v2.Version.Build{
+	if v1.Version.Major > v2.Version.Major {
 		return 1, nil
+	}else if v2.Version.Major > v1.Version.Major{
+		return -1, nil
 	}
 
-	if v1.Version.Major == v2.Version.Major && v1.Version.Minor == v2.Version.Minor && v1.Version.Branch == v2.Version.Branch && v1.Version.Build == v2.Version.Build{
-		return 0, nil
+	if v1.Version.Minor > v2.Version.Minor {
+		return 1, nil
+	}else if v2.Version.Minor > v1.Version.Minor{
+		return -1, nil
 	}
 
-	return -1, nil
+	if v1.Version.Branch > v2.Version.Branch {
+		return 1, nil
+	}else if v2.Version.Branch > v1.Version.Branch{
+		return -1, nil
+	}
+
+	if v1.Version.Build > v2.Version.Build {
+		return 1, nil
+	}else if v2.Version.Build > v1.Version.Build{
+		return -1, nil
+	}
+
+	return 0, nil
 }
 
 func CompareVersion(v1 , v2 string)(int ,error){
